@@ -1,0 +1,26 @@
+name: STREAMLITE-1
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"   # Every 5 min auto-run
+  workflow_dispatch:        # Manual run button
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Message Script
+        run: |
+          python3 main.py
